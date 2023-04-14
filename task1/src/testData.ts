@@ -7,6 +7,7 @@ export const leftChildOnlyRoot = new Tree(
 );
 export const emptyTree = new Tree(null);
 
+// example tree sent in email
 export const root = new Tree(
   new Node(
     5,
@@ -23,14 +24,16 @@ export const root = new Tree(
   )
 );
 
-export const fakeRoot = new Tree(
+// example tree crated by me
+export const anotherRoot = new Tree(
   new Node(
     5,
     new Node(2, new Node(2, null, null), new Node(15, null, null)),
     new Node(
       7,
       new Node(1, null, null),
-      new Node(3, new Node(2, null, null), new Node(8, null, null))
+      new Node(3, new Node(2, null, null), null)
     )
   )
 );
+

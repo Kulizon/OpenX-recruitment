@@ -1,7 +1,7 @@
 import { areTreesIdentical } from "./task1";
 import {
   root,
-  fakeRoot,
+  anotherRoot,
   leftChildOnlyRoot,
   rootOnly,
   emptyTree,
@@ -10,6 +10,10 @@ import {
 describe("testing countLeafs function", () => {
   test("example tree has 5 leafs", () => {
     expect(root.countLeafs()).toBe(5);
+  });
+
+  test("second example tree has 4 leafs", () => {
+    expect(anotherRoot.countLeafs()).toBe(4);
   });
 
   test("empty trees have no leafs", () => {
@@ -24,6 +28,10 @@ describe("testing countLeafs function", () => {
 describe("testing calculateDepth function", () => {
   test("example tree has depth equal to 4", () => {
     expect(root.calculateDepth()).toBe(4);
+  });
+
+  test("second example tree has depth equal to 3", () => {
+    expect(anotherRoot.calculateDepth()).toBe(3);
   });
 
   test("empty trees have no depth", () => {
@@ -61,6 +69,6 @@ describe("testing areIdentical function", () => {
   });
 
   test("different trees are not identical to each other 2", () => {
-    expect(areTreesIdentical(root, fakeRoot)).toBe(false);
+    expect(areTreesIdentical(root, anotherRoot)).toBe(false);
   });
 });

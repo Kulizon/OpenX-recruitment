@@ -6,7 +6,10 @@
 git clone https://github.com/Kulizon/OpenX-recruitment-tasks
 ```
 
+### install dependencies
+
 ```bash
+cd task1
 npm install
 ```
 
