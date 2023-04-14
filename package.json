@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^2.6.6"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.3"
+  },
+  "scripts": {
+    "task2": "ts-node --esm task2.ts",
+    "test": "dir"
+  }
+}

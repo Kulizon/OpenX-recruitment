@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 const USERS_URL = "https://fakestoreapi.com/users";
 
 interface FetchResponseInterface {
@@ -16,4 +18,6 @@ const fetchData = async (fetchUrl: string): Promise<FetchResponseInterface> => {
   }
 };
 
+const data = await fetchData(USERS_URL);
+console.log(data);
 
