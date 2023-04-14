@@ -16,7 +16,7 @@ describe("testing countLeafs function", () => {
     expect(emptyTree.countLeafs()).toBe(0);
   });
 
-  test("trees with only root only should have 1 leaf", () => {
+  test("trees with only root have only 1 leaf", () => {
     expect(rootOnly.countLeafs()).toBe(1);
   });
 });
@@ -48,7 +48,7 @@ describe("testing areIdentical function", () => {
     expect(areTreesIdentical(root, Object.assign({}, root))).toBe(true);
   });
 
-  test("empty tree are not identical to not empty ones", () => {
+  test("empty trees are not identical to not empty ones", () => {
     expect(areTreesIdentical(root, emptyTree)).toBe(false);
   });
 

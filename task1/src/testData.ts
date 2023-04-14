@@ -1,4 +1,5 @@
-import { Node, Tree } from "./task1";
+import { Tree } from "./task1";
+import { Node } from "./node";
 
 export const rootOnly = new Tree(new Node(1, null, null));
 export const leftChildOnlyRoot = new Tree(
