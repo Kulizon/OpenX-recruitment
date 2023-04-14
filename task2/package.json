@@ -7,7 +7,7 @@
     "@types/node-fetch": "^2.6.3"
   },
   "scripts": {
-    "run": "ts-node --esm task2.ts",
+    "start": "ts-node --esm task2.ts",
     "test": "dir"
   }
 }
