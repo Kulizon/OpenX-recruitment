@@ -39,7 +39,7 @@ export const areIdentical = (
   node1: NodeInterface | null,
   node2: NodeInterface | null
 ): boolean => {
-  if (!(node1 && node2)) return node1 === node2;
+  if (!(node1 && node2)) return node1 === node2; // if at least one node equals to null -> check if the the other one also equal to null
   const isLeftSideIdentical = areIdentical(node1.left, node2.left);
   const isRightSideIdentical = areIdentical(node1.right, node2.right);
 
@@ -49,7 +49,3 @@ export const areIdentical = (
     isRightSideIdentical
   );
 };
-
-console.log(countLeafs(root));
-console.log(calculateDepth(root));
-console.log(areIdentical(root, fakeRoot));

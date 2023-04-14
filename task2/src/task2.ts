@@ -3,6 +3,7 @@ import {
   ProductCategoryInterface,
   ProductsDataInterface,
   CartsDataInterface,
+  FullNameInterface,
 } from "./interfaces.ts";
 import {
   USERS_URL,
@@ -18,8 +19,7 @@ export const retrieveProductCategories = (
   status: 0 | -1
 ): ProductCategoryInterface => {
   if (status === -1 || !data) {
-    console.log("Error retriving products data!");
-    return {};
+    throw new Error("Error retriving products data!");
   }
 
   const output: ProductCategoryInterface = {};
@@ -37,11 +37,22 @@ export const findMostExpensiveCart = (
   data: CartsDataInterface[] | null,
   status: 0 | -1,
   products: ProductsDataInterface[] | null,
-  productsStatus: 0 | -1
-): number => {
-  if (status === -1 || productsStatus === -1 || !data || !products) {
-    console.log("Error retriving cart or products data!");
-    return -1;
+  productsStatus: 0 | -1,
+  users: UsersDataInterface[] | null,
+  usersStatus: 0 | -1
+): {
+  name: FullNameInterface;
+  value: Number;
+} | null => {
+  if (
+    status === -1 ||
+    productsStatus === -1 ||
+    !data ||
+    !products ||
+    !users ||
+    usersStatus == -1
+  ) {
+    throw new Error("Error retriving cart, products or users data!");
   }
 
   // create dictionary with productIds as names and product prices as values
@@ -50,8 +61,23 @@ export const findMostExpensiveCart = (
     productValues[prod.id.toString()] = prod.price;
   });
 
+  const userNames: { [key: string]: FullNameInterface } = {};
+  users.forEach((user) => {
+    userNames[user.id.toString()] = user.name;
+  });
+
   // find max cart value
   let max = 0;
+  let maxCart: {
+    name: FullNameInterface;
+    value: Number;
+  } = {
+    name: {
+      firstname: "",
+      lastname: "",
+    },
+    value: 0,
+  };
   data.forEach((cart) => {
     // sum up each product in cart
     const cartValue = cart.products.reduce(
@@ -59,10 +85,14 @@ export const findMostExpensiveCart = (
         (sum += productValues[prod.productId.toString()] * prod.quantity),
       0
     );
-    if (cartValue > max) max = cartValue;
+    if (cartValue > max) {
+      max = cartValue;
+      maxCart.name = userNames[cart.userId];
+      maxCart.value = cartValue;
+    }
   });
 
-  return max;
+  return maxCart;
 };
 
 // task 4, returns array with ids of two users that live furthest apart
@@ -71,8 +101,7 @@ export const findFurthestUsers = (
   status: 0 | -1
 ): [number, number] => {
   if (status === -1 || !data) {
-    console.log("Error retriving users data!");
-    return [-1, -1];
+    throw new Error("Error retriving users data!");
   }
 
   let max = 0;
@@ -83,7 +112,12 @@ export const findFurthestUsers = (
     for (let j = i + 1; j < n; j++) {
       const { lat: lat1, long: long1 } = data[i].address.geolocation;
       const { lat: lat2, long: long2 } = data[j].address.geolocation;
-      const dist = calculateDistance(lat1, lat2, long1, long2);
+      const dist = calculateDistance(
+        parseFloat(lat1),
+        parseFloat(lat2),
+        parseFloat(long1),
+        parseFloat(long2)
+      );
 
       if (dist > max) {
         max = dist;
@@ -105,16 +139,18 @@ const main = async () => {
   const { status: productsResponseStatus, data: productsData } =
     await fetchData<ProductsDataInterface[]>(PRODUCTS_URL);
 
-  // console.log(retrieveProductCategories(productsData, productsResponseStatus));
-  // console.log(
-  //   findMostExpensiveCart(
-  //     cartsData,
-  //     cartsResponseStatus,
-  //     productsData,
-  //     productsResponseStatus
-  //   )
-  // );
-  // console.log(findFurthestUsers(userData, userResponseStatus));
+  console.log(retrieveProductCategories(productsData, productsResponseStatus));
+  console.log(
+    findMostExpensiveCart(
+      cartsData,
+      cartsResponseStatus,
+      productsData,
+      productsResponseStatus,
+      userData,
+      userResponseStatus
+    )
+  );
+  console.log(findFurthestUsers(userData, userResponseStatus));
 };
 
 main();
