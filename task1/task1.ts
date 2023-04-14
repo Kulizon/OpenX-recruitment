@@ -7,6 +7,7 @@ export interface NodeInterface {
   right: NodeInterface | null;
 }
 
+// task 1
 export const countLeafs = (node: NodeInterface | null): number => {
   if (!node) return 0;
   if (!node.left && !node.right) return 1;
@@ -18,6 +19,7 @@ export const countLeafs = (node: NodeInterface | null): number => {
   return sum;
 };
 
+// task 2
 export const calculateDepth = (initialNode: NodeInterface | null): number => {
   let max = 1;
   if (!initialNode?.left && !initialNode?.right) return 0;
@@ -32,13 +34,14 @@ export const calculateDepth = (initialNode: NodeInterface | null): number => {
   return max;
 };
 
+// task 3
 export const areIdentical = (
   node1: NodeInterface | null,
   node2: NodeInterface | null
 ): boolean => {
   if (!(node1 && node2)) return node1 === node2;
-  let isLeftSideIdentical = areIdentical(node1.left, node2.left);
-  let isRightSideIdentical = areIdentical(node1.right, node2.right);
+  const isLeftSideIdentical = areIdentical(node1.left, node2.left);
+  const isRightSideIdentical = areIdentical(node1.right, node2.right);
 
   return !!(
     node1?.val === node2?.val &&
