@@ -12,19 +12,8 @@ import {
   calculateDistance,
 } from "./utils.ts";
 
-// task 1
-const { status: userResponseStatus, data: userData } = await fetchData<
-  UsersDataInterface[]
->(USERS_URL);
-const { status: cartsResponseStatus, data: cartsData } = await fetchData<
-  CartsDataInterface[]
->(CARTS_URL);
-const { status: productsResponseStatus, data: productsData } = await fetchData<
-  ProductsDataInterface[]
->(PRODUCTS_URL);
-
-// task 2, returns dict with categories as names and values of products in according categories 
-const retrieveProductCategories = (
+// task 2, returns dict with categories as names and values of products in according categories
+export const retrieveProductCategories = (
   data: ProductsDataInterface[] | null,
   status: 0 | -1
 ): ProductCategoryInterface => {
@@ -44,11 +33,11 @@ const retrieveProductCategories = (
 };
 
 // task 3, returns the value most valuable cart
-const findMostExpensiveCart = (
+export const findMostExpensiveCart = (
   data: CartsDataInterface[] | null,
   status: 0 | -1,
-  productsStatus: 0 | -1,
-  products: ProductsDataInterface[] | null
+  products: ProductsDataInterface[] | null,
+  productsStatus: 0 | -1
 ): number => {
   if (status === -1 || productsStatus === -1 || !data || !products) {
     console.log("Error retriving cart or products data!");
@@ -62,7 +51,7 @@ const findMostExpensiveCart = (
   });
 
   // find max cart value
-  let max = -1; // -1 <=> carts array was empty
+  let max = 0;
   data.forEach((cart) => {
     // sum up each product in cart
     const cartValue = cart.products.reduce(
@@ -77,7 +66,7 @@ const findMostExpensiveCart = (
 };
 
 // task 4, returns array with ids of two users that live furthest apart
-const findFurthestUsers = (
+export const findFurthestUsers = (
   data: UsersDataInterface[] | null,
   status: 0 | -1
 ): [number, number] => {
@@ -86,7 +75,7 @@ const findFurthestUsers = (
     return [-1, -1];
   }
 
-  let max = -1; // -1 <=> users array was empty or has only one user
+  let max = 0;
   let userIds: [number, number] = [-1, -1]; // [-1, -1] <=> users array was empty or has only one user
   const n = data.length;
 
@@ -106,6 +95,26 @@ const findFurthestUsers = (
   return userIds;
 };
 
-console.log(retrieveProductCategories(productsData, productsResponseStatus));
-console.log(findMostExpensiveCart(cartsData, cartsResponseStatus, productsResponseStatus, productsData));
-console.log(findFurthestUsers(userData, userResponseStatus));
+const main = async () => {
+  const { status: userResponseStatus, data: userData } = await fetchData<
+    UsersDataInterface[]
+  >(USERS_URL);
+  const { status: cartsResponseStatus, data: cartsData } = await fetchData<
+    CartsDataInterface[]
+  >(CARTS_URL);
+  const { status: productsResponseStatus, data: productsData } =
+    await fetchData<ProductsDataInterface[]>(PRODUCTS_URL);
+
+  // console.log(retrieveProductCategories(productsData, productsResponseStatus));
+  // console.log(
+  //   findMostExpensiveCart(
+  //     cartsData,
+  //     cartsResponseStatus,
+  //     productsData,
+  //     productsResponseStatus
+  //   )
+  // );
+  // console.log(findFurthestUsers(userData, userResponseStatus));
+};
+
+main();

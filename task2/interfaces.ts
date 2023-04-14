@@ -6,7 +6,7 @@ export interface FetchResponseInterface<DataType> {
 
 // data received from api
 export interface UsersDataInterface {
-  id: number,
+  id: number;
   address: {
     geolocation: {
       lat: number;
