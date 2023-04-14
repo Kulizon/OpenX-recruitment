@@ -3,7 +3,7 @@
 ## Clone the repository
 
 ```bash
-git clone
+git clone https://github.com/Kulizon/OpenX-recruitment-tasks
 ```
 
 ## Task 1
@@ -13,13 +13,13 @@ cd task1
 npm i
 ```
 
-### to start program:
+run:
 
 ```bash
 npm run start
 ```
 
-### to run tests:
+run tests:
 
 ```bash
 npm run test
@@ -32,13 +32,13 @@ cd task2
 npm i
 ```
 
-### to run:
+run:
 
 ```bash
 npm run start
 ```
 
-### to run tests:
+run tests:
 
 ```bash
 npm run test
@@ -51,7 +51,7 @@ The programs are written in typescript and tests are done with the help of jest.
 ## Task 1
 
 To implement the tree structure I used regular javascript objects with typescript support.
-Another valid option was to create 'Node' class as well.
+Another valid option was to create 'Node' class.
 I assumed that the tree has two children at most. For better scalability 'leftChild' and 'rightChild' could be replaced with 'children' array.
 
 ### countLeaves()
@@ -64,7 +64,7 @@ Accepts an object of type NodeInterface and returns the largest number of edges 
 
 ### areIdentical()
 
-Accepts an object of type NodeInterface and returns a boolean. Check if two trees are identical - each node has the same value and children.
+Accepts an object of type NodeInterface and returns a boolean. Checks if two trees are identical - each node has the same value and children.
 
 ## Task 2
 
