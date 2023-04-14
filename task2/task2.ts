@@ -4,7 +4,13 @@ import {
   ProductsDataInterface,
   CartsDataInterface,
 } from "./interfaces.ts";
-import { USERS_URL, PRODUCTS_URL, CARTS_URL, fetchData } from "./utils.ts";
+import {
+  USERS_URL,
+  PRODUCTS_URL,
+  CARTS_URL,
+  fetchData,
+  calculateDistance,
+} from "./utils.ts";
 
 // task 1
 const { status: userResponseStatus, data: userData } = await fetchData<
@@ -17,7 +23,7 @@ const { status: productsResponseStatus, data: productsData } = await fetchData<
   ProductsDataInterface[]
 >(PRODUCTS_URL);
 
-// task 2
+// task 2, returns dict with categories as names and values of products in according categories 
 const retrieveProductCategories = (
   data: ProductsDataInterface[] | null,
   status: 0 | -1
@@ -37,15 +43,16 @@ const retrieveProductCategories = (
   return output;
 };
 
-// task 3
-const findMaxCart = (
+// task 3, returns the value most valuable cart
+const findMostExpensiveCart = (
   data: CartsDataInterface[] | null,
   status: 0 | -1,
+  productsStatus: 0 | -1,
   products: ProductsDataInterface[] | null
-) => {
-  if (status === -1 || !data || !products) {
+): number => {
+  if (status === -1 || productsStatus === -1 || !data || !products) {
     console.log("Error retriving cart or products data!");
-    return {};
+    return -1;
   }
 
   // create dictionary with productIds as names and product prices as values
@@ -55,7 +62,7 @@ const findMaxCart = (
   });
 
   // find max cart value
-  let max = 0;
+  let max = -1; // -1 <=> carts array was empty
   data.forEach((cart) => {
     // sum up each product in cart
     const cartValue = cart.products.reduce(
@@ -69,5 +76,36 @@ const findMaxCart = (
   return max;
 };
 
-// console.log(retrieveProductCategories(productsData, productsResponseStatus));
-console.log(findMaxCart(cartsData, cartsResponseStatus, productsData));
+// task 4, returns array with ids of two users that live furthest apart
+const findFurthestUsers = (
+  data: UsersDataInterface[] | null,
+  status: 0 | -1
+): [number, number] => {
+  if (status === -1 || !data) {
+    console.log("Error retriving users data!");
+    return [-1, -1];
+  }
+
+  let max = -1; // -1 <=> users array was empty or has only one user
+  let userIds: [number, number] = [-1, -1]; // [-1, -1] <=> users array was empty or has only one user
+  const n = data.length;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      const { lat: lat1, long: long1 } = data[i].address.geolocation;
+      const { lat: lat2, long: long2 } = data[j].address.geolocation;
+      const dist = calculateDistance(lat1, lat2, long1, long2);
+
+      if (dist > max) {
+        max = dist;
+        userIds = [data[i].id, data[j].id];
+      }
+    }
+  }
+
+  return userIds;
+};
+
+console.log(retrieveProductCategories(productsData, productsResponseStatus));
+console.log(findMostExpensiveCart(cartsData, cartsResponseStatus, productsResponseStatus, productsData));
+console.log(findFurthestUsers(userData, userResponseStatus));

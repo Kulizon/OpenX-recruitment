@@ -20,3 +20,27 @@ export const fetchData = async <DataType>(
     return { status: -1, data: null };
   }
 };
+
+// return distance in meters between two points, based on Haversine formula
+export const calculateDistance = (
+  lat1: number,
+  lat2: number,
+  long1: number,
+  long2: number
+): number => {
+  const R = 6371e3; // metres
+  const rad1 = (lat1 * Math.PI) / 180; // φ1 in radians
+  const rad2 = (lat2 * Math.PI) / 180; // φ2 in radians
+  const latDeltaRad = ((lat2 - lat1) * Math.PI) / 180; // φλ in radians
+  const longDeltaRad = ((long2 - long1) * Math.PI) / 180; // Δλ in radians
+
+  const a =
+    Math.sin(latDeltaRad / 2) * Math.sin(latDeltaRad / 2) +
+    Math.cos(rad1) *
+      Math.cos(rad2) *
+      Math.sin(longDeltaRad / 2) *
+      Math.sin(longDeltaRad / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // in meters
+};

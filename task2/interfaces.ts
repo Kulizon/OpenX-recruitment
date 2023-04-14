@@ -5,7 +5,16 @@ export interface FetchResponseInterface<DataType> {
 }
 
 // data received from api
-export interface UsersDataInterface {}
+export interface UsersDataInterface {
+  id: number,
+  address: {
+    geolocation: {
+      lat: number;
+      long: number;
+    };
+  };
+}
+
 export interface CartsDataInterface {
   products: { productId: number; quantity: number }[];
 }
