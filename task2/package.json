@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start": "ts-node --esm task2.ts",
-    "test": "dir"
+    "test": "jest"
   }
 }
