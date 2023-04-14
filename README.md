@@ -50,21 +50,20 @@ The programs are written in typescript and tests are done with the help of jest.
 
 ## Task 1
 
-To implement the tree structure I used regular javascript objects with typescript support.
-Another valid option was to create 'Node' class.
-I assumed that the tree has two children at most. For better scalability 'leftChild' and 'rightChild' could be replaced with 'children' array.
+To implement the tree structure I used a class 'Tree' and each node is of type 'Node'.
+I assumed that the tree has two children at most. For better scalability 'left' and 'right' properties could be replaced with 'children' array.
 
 ### countLeaves()
 
-Accepts an object of type NodeInterface and returns the number of leafs that the tree has.
+Returns the number of leafs that the tree has.
 
 ### calculateDepth()
 
-Accepts an object of type NodeInterface and returns the largest number of edges in a path from the root to a leaf.
+Returns the largest number of edges in a path from the root to a leaf.
 
 ### areIdentical()
 
-Accepts an object of type NodeInterface and returns a boolean. Checks if two trees are identical - each node has the same value and children.
+Rreturns a boolean. Checks if two trees are identical - each node has the same value and children.
 
 ## Task 2
 
