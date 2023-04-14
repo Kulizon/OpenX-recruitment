@@ -78,7 +78,7 @@ Returns a dictionary with categories as property names and prices of products in
 
 ### findMostExpensiveCart()
 
-Returns the value of the most expensive cart.
+Returns the value of the most expensive cart and its owner.
 
 ### findFurthestUsers()
 
