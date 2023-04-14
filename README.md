@@ -13,13 +13,13 @@ cd task1
 npm i
 ```
 
-run:
+### run:
 
 ```bash
 npm run start
 ```
 
-run tests:
+### run tests:
 
 ```bash
 npm run test
@@ -32,13 +32,13 @@ cd task2
 npm i
 ```
 
-run:
+### run:
 
 ```bash
 npm run start
 ```
 
-run tests:
+### run tests:
 
 ```bash
 npm run test
