@@ -138,19 +138,6 @@ const main = async () => {
   >(CARTS_URL);
   const { status: productsResponseStatus, data: productsData } =
     await fetchData<ProductsDataInterface[]>(PRODUCTS_URL);
-
-  console.log(retrieveProductCategories(productsData, productsResponseStatus));
-  console.log(
-    findMostExpensiveCart(
-      cartsData,
-      cartsResponseStatus,
-      productsData,
-      productsResponseStatus,
-      userData,
-      userResponseStatus
-    )
-  );
-  console.log(findFurthestUsers(userData, userResponseStatus));
 };
 
 main();
