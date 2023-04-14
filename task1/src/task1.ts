@@ -30,7 +30,10 @@ export class Tree {
     if (!this.root || this.root.isLeaf()) return 0; // if the tree is empty or is just a leaf then depth equals to 0
 
     const traverse = (node: Node, cur: number) => {
-      if (node.isLeaf() && cur > max) max = cur - 1;
+      if (node.isLeaf() && cur > max) {
+        max = cur - 1;
+        return;
+      }
 
       if (node.left) traverse(node.left, cur + 1);
       if (node.right) traverse(node.right, cur + 1);
@@ -41,16 +44,16 @@ export class Tree {
 }
 
 // task 3
-export const areTreesIdentical = (root1: Tree, root2: Tree): boolean => {
+export const areTreesIdentical = (tree1: Tree, tree2: Tree): boolean => {
   const traverse = (node1: Node | null, node2: Node | null): boolean => {
-    if (!(node1 && node2)) return node1 === node2; // if at least one node equals to null -> check if the the other one also equal to null
+    if (!node1 || !node2) return node1 === node2; // if at least one node equals to null -> check if the the other one also equal to null
     const isLeftSideIdentical = traverse(node1.left, node2.left);
     const isRightSideIdentical = traverse(node1.right, node2.right);
 
     return (
-      node1?.val === node2?.val && isLeftSideIdentical && isRightSideIdentical
+      node1.val === node2.val && isLeftSideIdentical && isRightSideIdentical
     );
   };
 
-  return traverse(root1.root, root2.root);
+  return traverse(tree1.root, tree2.root);
 };
