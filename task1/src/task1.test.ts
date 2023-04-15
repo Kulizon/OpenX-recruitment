@@ -26,23 +26,23 @@ describe("testing countLeafs function", () => {
 });
 
 describe("testing calculateHeight function", () => {
-  test("example tree has depth equal to 4", () => {
+  test("example tree has height equal to 4", () => {
     expect(root.calculateHeight()).toBe(4);
   });
 
-  test("second example tree has depth equal to 3", () => {
+  test("second example tree has height equal to 3", () => {
     expect(anotherRoot.calculateHeight()).toBe(3);
   });
 
-  test("empty trees have no depth", () => {
+  test("empty trees have no height", () => {
     expect(emptyTree.calculateHeight()).toBe(0);
   });
 
-  test("trees with only root have no depth", () => {
+  test("trees with only root have no height", () => {
     expect(rootOnly.calculateHeight()).toBe(0);
   });
 
-  test("trees with only one child which is a leaf have depth equal to 1", () => {
+  test("trees with only one child which is a leaf have height equal to 1", () => {
     expect(leftChildOnlyRoot.calculateHeight()).toBe(1);
   });
 });
