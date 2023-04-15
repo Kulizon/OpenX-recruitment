@@ -3,7 +3,7 @@
 ## Clone the repository
 
 ```bash
-git clone https://github.com/Kulizon/OpenX-recruitment-tasks
+git clone https://github.com/Kulizon/OpenX-recruitment
 ```
 
 ### install dependencies
