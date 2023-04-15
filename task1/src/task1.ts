@@ -25,7 +25,7 @@ export class Tree {
   };
 
   // calculate the distance between a root and the furthest leaf
-  calculateDepth(): number {
+  calculateHeight(): number {
     let max = 1;
     if (!this.root || this.root.isLeaf()) return 0; // if the tree is empty or is just a leaf then depth equals to 0
 

@@ -35,7 +35,7 @@ To implement the tree structure I created a class 'Tree'. A tree has a root whic
 
 Returns the number of leafs that the tree has.
 
-### calculateDepth()
+### calculateHeight()
 
 Returns the largest number of edges in a path from the root to a leaf.
 
